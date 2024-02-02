@@ -15,34 +15,35 @@
                     <input type="date" id="date"><!-- type=date attribute allows to pick date from the calender.creates a date input field.users can either type a date or use a build-in calender picker-->
                     <button onclick="calculateAge()">Calculate</button><!--adds a button labeled as calculator-->
                 </div>
-                <p id="result"></p>
+                <p id="result"></p><!-- variable declartion store the result paragraph element-->
             </div>
         </div>
         
         <script>
-            let userInput = document.getElementById("date");
-            userInput.max = new Date().toISOString().split("T")[0];
-            let result = document.getElementById("result");
+            let userInput = document.getElementById("date");//javascript variable declartion to store the date input element.
+            userInput.max = new Date().toISOString().split("T")[0];//sets the miximum allowed date in the date input field to the current date
+            let result = document.getElementById("result");// variable declaration to store the result paragraph element.
+            
 
-            function calculateAge(){
-                let birthDate = new Date(userInput.value);
-                let d1=birthDate.getDate();
-                let m1 = birthDate.getMonth() + 1;
-                let y1 = birthDate.getFullYear();
+            function calculateAge(){ //calcuateage function is that calculates and displays the age based on user input.
+                let birthDate = new Date(userInput.value);// retrives the selected date from the user input and creates a javascript date object.
+                let d1=birthDate.getDate();//Retrives the day from the birthdate.
+                let m1 = birthDate.getMonth() + 1;// retrieves the month from the birth date.note: months are zero-indexed in javascript, so we add 1.
+                let y1 = birthDate.getFullYear();//retrieves the year from the birth date.
 
-                let today = new Date();
+                let today = new Date();//javascript date object representing the current date.
 
-                let d2= today.getDate();
-                let m2 = today.getMonth() + 1;
-                let y2 = today.getFullYear();
+                let d2= today.getDate();//retrieves the day from the current date.
+                let m2 = today.getMonth() + 1;//retrieves the month from the current date.
+                let y2 = today.getFullYear();//retrieves the year from the current date.
 
-                let d3, m3, y3;
+                let d3, m3, y3;//declaration of variables to store the calculated age.
 
-                y3 = y2 - y1;
+                y3 = y2 - y1;//calculates the difference between the current year and the birth year
 
                 if(m2 >= m1){
                     m3 = m2 - m1;
-
+//checks if current month is greater than or equal to the birth month to calculates difference in months.
                 }else{
                     y3--;
                     m3 = 12 + m2 - m1;
@@ -50,7 +51,7 @@
                 }
                 if(d2 >= d1){
                     d3 = d2 - d1;
-
+// checks if current day is greater than or equal to the birth day to claculate difference between the days.
                 }else{
                     m3--;
                     d3 = getDaysInMonth(y1, m1) + d2 - d1;
@@ -61,13 +62,13 @@
                     y3--;
                 }
                 result.innerHTML = `you are <span>${y3}</span> years, <span>${m3}</span> months and <span>${d3}</span> days old`;
-
+// dis[lays the calculated age in the result paragraph element using template literals]
 
 
             }
 
-            function getDaysInMonth(year, month){
-                return new Date(year, month, 0).getDate();
+            function getDaysInMonth(year, month){//javascript function that returns the number of days in a specific month.
+                return new Date(year, month, 0).getDate();//creates a date object for the last day of the specified month and retrieves the day, effectively giving numbers of days in that month.
 
             }
         </script>
